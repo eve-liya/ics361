@@ -1,0 +1,33 @@
+It took 6 guesses to guess the number 1, 6 guesses to guess the number 44, 3
+guesses to guess the number 88.
+ 
+CG-USER(1): (guess-my-number)
+50
+CG-USER(2): (smaller)
+25
+CG-USER(3): (smaller)
+12
+CG-USER(4): (smaller)
+6
+CG-USER(5): (smaller)
+3
+CG-USER(6): (smaller)
+1
+CG-USER(7): (start-over)
+50
+CG-USER(8): (smaller)
+25
+CG-USER(9): (bigger)
+37
+CG-USER(10): (bigger)
+43
+CG-USER(11): (bigger)
+46
+CG-USER(12): (smaller)
+44
+CG-USER(13): (start-over)
+50
+CG-USER(14): (bigger)
+75
+CG-USER(15): (bigger)
+88

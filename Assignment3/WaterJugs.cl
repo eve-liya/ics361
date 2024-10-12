@@ -4,12 +4,13 @@
 ;;; First number represents the 5 gallon jug water level
 ;;; Second number represents the 3 gallon jug water level
 ;;; Starting state (0 0) no water in each jug
-(DEFVAR *start* '(0 0))
+(DEFCONSTANT *water-start* '(0 0))
 ;;; Goal is (4 x) since 3 gallon jug can't hold 4 gallons
-(DEFVAR *goals* '((4 0) (4 1) (4 2) (4 3)))
+(DEFCONSTANT *water-goals* '((4 0) (4 1) (4 2) (4 3)))
 ;; List of moves
-(DEFVAR *moves* '(p3o p5o f3 f5 p53 p35))
+(DEFCONSTANT *water-moves* '(p3o p5o f3 f5 p53 p35))
 
+(DEFCONSTANT *water-hn* 'hn)
 ;; A simple heuristic, the closer you are to 4 then the closer you are to the goal
 (DEFUN hn (state)
   (abs (- 4 (NTH 0 state)))

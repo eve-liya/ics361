@@ -1,0 +1,19 @@
+The heurstics for the water jugs didn't really help, in comparison to the 
+dfs it only searched 9, while in the heurstic it searched 11. it did better
+compared to the bfs which had to search 13. The heurstic was pretty simple so 
+it's not a very accurate h(n). It could be less for dfs since ti might be lucky
+and have the right set of moves and find a solution fast.
+
+For the missionaries and cannibals it didn't really help either the nodes searched for
+each bfs, dfs, and a* were just within 1 of each other.
+The search space itself is quite small for both these problems so having the heurstics isn't much better than just randomly
+going through moves and the heurstic defined could just be worse than the random move order choosen by us.
+
+The manhattan distance heurstics was much better than the tiles out of place one
+it was actually able to solve the 2nd scenario when the tiles out of place wasn't able to.
+This seemed to have more of an effect since the search space was much larger, when I was testing
+the dfs on the tiles problem, it wasn't able to find a solution for any random state, I had to set up
+a specific start state in which the moves I had listed was able to solve it. 
+
+Both of them were able to solve the first example with the same amount of nodes searched this is probably
+because it was much closer to the solution so the search space would be less.

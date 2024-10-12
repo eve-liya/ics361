@@ -2,20 +2,19 @@
 
 ;;; State is represented by (numCannibalsWest numMissionariesWest whichSideBoat)
 ;; Starting state with 3 cannibals, 3 missionaries and boat all on the west side
-(DEFVAR *start* '(3 3 W))
+(DEFCONSTANT *mission-start* '(3 3 W))
 ;; Goal: all people have crossed the river
-(DEFVAR *goals* '((0 0 E)))
+(DEFCONSTANT *mission-goals* '((0 0 E)))
 ;; All possible moves since boat can carry at most two people.
-(DEFVAR *moves* '(c1 c2 m1 m2 cm))
+(DEFCONSTANT *mission-moves* '(c1 c2 m1 m2 cm))
 
 ;; heuristic function
-(DEFVAR *hn* 'hn)
+(DEFCONSTANT *mission-hn* 'hn)
 
-;; Super simple heuristic, the less people on each shore the closer you are to the goal
+;; Super simple heuristic, the less people on the west shore the closer you are to the goal
 (DEFUN hn (state)
   (+ (NTH 0 state) (NTH 1 state))
   )
-
 
 ;; If cannibals outnumber the missionaries on either side then it's invalid state return NIL
 ;; Check to see if we have a valid amount of people on the west, 

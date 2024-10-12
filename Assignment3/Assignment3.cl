@@ -28,8 +28,8 @@
           ;; 3. Add the current node to the closed list. (CONS (CAR open) close)
           ;; 4. Pass the same goals and moves
           ;; 5. Recursively call the a-star with the new open and closed lists. 
-          (a-star (sort-open (APPEND (generate-children (CAR open) moves) (CDR open)) hn)
-                         (CONS (CAR open) close) goals moves hn))))
+          (a-star (my-sort (APPEND (generate-children (CAR open) moves) (CDR open)) hn)
+                  (CONS (CAR open) close) goals moves hn))))
 
 ;;; Helper function to generate the valid children from a given node
 (DEFUN generate-children (node moves)
@@ -60,12 +60,24 @@
         ;; Look through the rest of the list
         (T (myMEMBER look (CDR in)))))
 
-;; Sorts the open list given a comparison function
-(DEFUN sort-open (open hn)
-  (sort (copy-list open) (lambda (node1 node2) (comparison node1 node2 hn))))
+;; sorting the open list with a heurstic function
+(DEFUN my-sort (lst hn)
+  ;; inserts each element in order
+  (COND ((null lst) NIL)
+        (T (insert-in-order (CAR lst) (my-sort (CDR lst) hn) hn))))
+
+;; Helper function to insert items in order
+(DEFUN insert-in-order (element list hn)
+  (COND ((null list) (LIST element))
+        ;; Compares the current element with the next element
+        ;; if its in the correct place then add it to the front
+        ((comparison element (CAR list) hn) (CONS element list))
+        ;; otherwise, call insert-in-order again with the rest of the list
+        (T (CONS (CAR list) (insert-in-order element (CDR list) hn)))))
 
 ;; f(n) = g(n) + h(n)
 ;; g(n) = length of previous path
 ;; h(n) = some heuristic defined in problem.
+;; Returns true if node1 is less than node 2 defined by the f(n)
 (DEFUN comparison (node1 node2 hn)
   (< (+ (LENGTH (CDR node1)) (funcall hn (CAR node1))) (+ (LENGTH (CDR node2)) (funcall hn (CAR node2)))))

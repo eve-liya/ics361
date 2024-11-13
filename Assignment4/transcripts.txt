@@ -1,0 +1,162 @@
+| ?- listlength([9, 5, 6, 4],L).
+
+L = 4
+
+yes
+| ?- 
+listlength([], 0).
+
+yes
+| ?- 
+listlength(List, 0).
+
+List = []
+
+yes
+| ?- 
+listlength([5, [6, 7, 8]], L).
+
+L = 2
+
+yes
+| ?- 
+listlength(L, 3).
+
+L = [_,_,_]
+
+yes
+| ?- 
+
+?- sit1(X), print(X).
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,red]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,red,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,red,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,red,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,red,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,white,red,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,white,red,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,white,red,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,white,red,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,white,red,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,white,red,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, white|...] ;
+[white,white,white,white,white,white,white,white,red,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, white, red|...] ;
+[white,white,white,white,white,white,white,red,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, white, red, white|...] ;
+[white,white,white,white,white,white,red,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, white, red, white, white|...] ;
+[white,white,white,white,white,red,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, white, red, white, white, white|...] ;
+[white,white,white,white,red,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, white, red, white, white, white, white|...] ;
+[white,white,white,red,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, white, red, white, white, white, white, white|...] ;
+[white,white,red,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, white, red, white, white, white, white, white, white|...] ;
+[white,red,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [white, red, white, white, white, white, white, white, white|...] ;
+[red,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white,white]
+X = [red, white, white, white, white, white, white, white, white|...] ;
+false.
+
+?- sit2(X).
+X = [orange, white, orange, black, white, black] ;
+X = [orange, black, orange, white, black, white] ;
+X = [orange, white, black, orange, white, black] ;
+X = [orange, white, black, orange, black, white] ;
+X = [orange, black, white, orange, white, black] ;
+X = [orange, black, white, orange, black, white] ;
+X = [orange, white, black, white, orange, black] ;
+X = [orange, black, white, black, orange, white] ;
+X = [orange, white, black, white, black, orange] ;
+X = [orange, black, white, black, white, orange] ;
+X = [white, orange, black, orange, white, black] ;
+X = [white, orange, black, orange, black, white] ;
+X = [black, orange, white, orange, white, black] ;
+X = [black, orange, white, orange, black, white] ;
+X = [white, orange, white, black, orange, black] ;
+X = [white, orange, black, white, orange, black] ;
+X = [black, orange, white, black, orange, white] ;
+X = [black, orange, black, white, orange, white] ;
+X = [white, orange, black, white, black, orange] ;
+X = [black, orange, white, black, white, orange] ;
+X = [white, black, orange, white, orange, black] ;
+X = [white, black, orange, black, orange, white] ;
+X = [black, white, orange, white, orange, black] ;
+X = [black, white, orange, black, orange, white] ;
+X = [white, black, orange, white, black, orange] ;
+X = [white, black, orange, black, white, orange] ;
+X = [black, white, orange, white, black, orange] ;
+X = [black, white, orange, black, white, orange] ;
+X = [white, black, white, orange, black, orange] ;
+X = [black, white, black, orange, white, orange] ;
+false.
+
+?- sit3(X).
+X = [green, green, pink, green, green, red] ;
+X = [green, green, red, green, green, pink] ;
+X = [green, green, pink, green, red, green] ;
+X = [green, green, red, green, pink, green] ;
+X = [green, green, pink, red, green, green] ;
+X = [green, green, red, pink, green, green] ;
+X = [green, pink, green, green, red, green] ;
+X = [green, red, green, green, pink, green] ;
+X = [green, pink, green, red, green, green] ;
+X = [green, red, green, pink, green, green] ;
+X = [pink, green, green, red, green, green] ;
+X = [red, green, green, pink, green, green] ;
+false.
+
+?- sit4(X).
+X = [silver, white, purple, silver, white, red, red, silver] ;
+X = [silver, white, red, silver, white, purple, red, silver] ;
+X = [silver, white, red, silver, white, red, purple, silver] ;
+false.
+
+| ?- split3(5,[]).
+
+no
+| ?-
+split3(6,[5, 5, 12]).
+
+no
+| ?-
+split3(14,[6, 5, 10, 1, 1, 1, 14]).
+
+true ?
+
+yes
+| ?- split3(5,[3, 1, 4, 1, 2]).
+
+true ?
+
+yes
+| ?- split3(6,[4, 3, 5, 2, 1]).
+
+no
+| ?-
+split3(7,[4, 5, 7, 2, 3]).
+
+no
+| ?-
+split3(8,[3,5,4,2,7,1]).
+
+true ?
+
+yes
+| ?- split3(3,[1, 2, 2, 2, 1, 1]).
+
+no
+| ?-
+

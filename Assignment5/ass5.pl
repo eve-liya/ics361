@@ -34,20 +34,48 @@ yesnoquestion --> [is,it,true,that], sentence(Q), {Q}.
 multiple_sentences(Q) --> sentence(Q),[and],multiple_sentences(Qs),{Q,Qs}.
 
 % A multiple sentence can be a single sentence
-multiple_sentences(Q) --> sentence(Q).
+multiple_sentences(Q) --> sentence(Q), {Q}.
 
 % base case of sentence
-sentence(Q) --> person(X), [is,the], relation(Y), [of], person(Z), {=..(Q, [Y,X,Z])}.
 sentence(Q) --> person(X), [is,a], relation(Y), {=..(Q, [Y,X,_])}.
-
 sentence(Q) --> person(X), [has,a], relation(Y), {=..(Q, [Y,X,_])}.
 
-sentence(Q) --> persons(PS), [are], relation(Y), {handle_plural(PS,Y,Q)}.
+sentence(Q) --> 
+    person(X), 
+    [is, the], 
+    relation(Rel, num=sing), 
+    [of], 
+    person(Y), 
+    {=..(Q, [Rel, X, Y])}.
 
-whoisquestion(Answer) --> [who, is, the], relation(X), [of], person(Y), {=..(Q, [X,Answer,Y]), Q}.
+sentence(Q) --> 
+    person(X), 
+    [is, a], 
+    relation(Rel, num=sing), 
+    {=..(Q, [Rel, X, _])}.
 
-persons([P | PS]) --> person(P), persons(PS).
-persons([P]) --> person(P).
+sentence(Q) --> 
+    person(X), 
+    [has, a], 
+    relation(Rel, num=sing), 
+    {=..(Q, [Rel, X, _])}.
+
+sentence(Q) --> 
+    people(XS), 
+    [are], 
+    relation(Rel, num=plur),
+    {=..(Q, [role,Rel,XS,_])}.
+
+sentence(Q) -->
+    people(XS),
+    [have],
+    relation(Rel, num=plur),
+    {=..(Q, [role,Rel,XS,_])}.
+
+whoisquestion(Answer) --> [who, is, the], relation(X, num=sing), [of], person(Y), {=..(Q, [X,Answer,Y]), Q}.
+
+people([P | PS]) --> person(P), [and] ,people(PS).
+people([P]) --> person(P).
 
 person(homer) --> [homer].
 person(lisa) --> [lisa].
@@ -63,46 +91,42 @@ person(herb) --> [herb].
 person(abe) --> [abe].
 person(mona) --> [mona].
 
-relation(parent) --> [parent]. 
-relation(parent) --> [creator].
-relation(father) --> [father].
-relation(father) --> [papa].
-relation(mother) --> [mother].
-relation(mother) --> [mama].
-relation(sibling) --> [sibling].
-relation(brother) --> [brother].
-relation(brother) --> [bro].
-relation(brother) --> [bruddah].
-relation(sister) --> [sister].
-relation(sister) --> [sis].
-relation(son) --> [son].
-relation(daughter) --> [daughter].
-
-relation(child) --> [child].
-relation(aunt) --> [aunt].
-relation(aunt) --> [aunty].
-relation(uncle) --> [uncle].
-relation(uncle) --> [unc].
-relation(niece) --> [niece].
-relation(nephew) --> [nephew].
-relation(nibling) --> [nibling].
-relation(grandparent) --> [grandparent].
-relation(grandmother) --> [grandmother].
-relation(grandmother) --> [meemaw].
-relation(grandmother) --> [grandma].
-relation(grandmother) --> [granny].
-relation(grandfather) --> [grandfather].
-relation(grandchild) --> [grandchild].
-relation(granddaughter) --> [granddaughter].
-relation(grandson) --> [grandson].
-relation(husband) --> [husband].
-relation(husband) --> [hubby].
-relation(wife) --> [wife].
-relation(wife) --> [wifey].
-relation(cousin) --> [cousin].
-relation(spouse) --> [spouse].
-relation(ancestor) --> [ancestor].
-relation(descendant) --> [descendant].
+relation(parent, num=sing) --> [parent].
+relation(parent, num=plur) --> [parents].
+relation(father, num=sing) --> [father].
+relation(father, num=plur) --> [fathers].
+relation(mother, num=sing) --> [mother].
+relation(mother, num=plur) --> [mothers].
+relation(child, num=sing) --> [child].
+relation(child, num=plur) --> [children].
+relation(sibling, num=sing) --> [sibling].
+relation(sibling, num=plur) --> [siblings].
+relation(ancestor, num=sing) --> [ancestor].
+relation(ancestor, num=plur) --> [ancestors].
+relation(descendant, num=sing) --> [descendant].
+relation(descendant, num=plur) --> [descendants].
+relation(grandparent, num=sing) --> [grandparent].
+relation(grandparent, num=plur) --> [grandparents].
+relation(grandfather, num=sing) --> [grandfather].
+relation(grandfather, num=plur) --> [grandfathers].
+relation(grandmother, num=sing) --> [grandmother].
+relation(grandmother, num=plur) --> [grandmothers].
+relation(uncle, num=sing) --> [uncle].
+relation(uncle, num=plur) --> [uncles].
+relation(aunt, num=sing) --> [aunt].
+relation(aunt, num=plur) --> [aunts].
+relation(nephew, num=sing) --> [nephew].
+relation(nephew, num=plur) --> [nephews].
+relation(niece, num=sing) --> [niece].
+relation(niece, num=plur) --> [nieces].
+relation(cousin, num=sing) --> [cousin].
+relation(cousin, num=plur) --> [cousins].
+relation(spouse, num=sing) --> [spouse].
+relation(spouse, num=plur) --> [spouses].
+relation(brother, num=sing) --> [brother].
+relation(brother, num=plur) --> [brothers].
+relation(sister, num=sing) --> [sister].
+relation(sister, num=plur) --> [sisters].
 
 /* THE DEFINITIONS
 
@@ -111,13 +135,13 @@ For example: X is Y's father if X is the parent of Y and X is male.
 */
 
 handle_plural([P1, P2 | PS], Relation, Q) :-
-    roles(Relation, [P1, P2 | PS], Q).
+    role(Relation, [P1, P2 | PS], Q).
 
-roles(_,[],[]).
+role(_,[],[]).
 
-roles(Rel, [HP | RP], [HQ | RQ]) :-
+role(Rel, [HP | RP], [HQ | RQ]) :-
     HQ =.. [Rel, HP, _],
-    roles(Rel,RP,RQ).
+    role(Rel,RP,RQ).
 
 father(X,Y) :-
   parent(X,Y),
@@ -282,30 +306,3 @@ spouse(clancy, jacqueline).
 spouse(homer, marge).
 spouse(jacqueline, clancy).
 spouse(marge, homer).
-
-
-% tester
-?- query([is,it,true,that,lisa,is,the,sibling,of,bart], _).
-?- query([is,it,true,that,bart,is,the,brother,of,lisa], _).
-?- query([is,it,true,that,lisa,is,the,sister,of,bart], _).
-?- query([is,it,true,that,bart,is,the,son,of,homer], _).
-?- query([is,it,true,that,lisa,is,the,daughter,of,marge], _).
-?- query([is,it,true,that,maggie,is,the,child,of,homer], _).
-?- query([is,it,true,that,marge,is,the,mother,of,bart], _).
-?- query([is,it,true,that,patty,is,the,aunt,of,lisa], _).
-?- query([is,it,true,that,herb,is,the,uncle,of,bart], _).
-?- query([is,it,true,that,ling,is,the,niece,of,selma], _).
-?- query([is,it,true,that,bart,is,the,nephew,of,patty], _).
-?- query([is,it,true,that,bart,is,the,nibling,of,patty], _).
-?- query([is,it,true,that,abe,is,the,grandparent,of,lisa], _).
-?- query([is,it,true,that,jacqueline,is,the,grandmother,of,bart], _).
-?- query([is,it,true,that,abe,is,the,grandfather,of,maggie], _).
-?- query([is,it,true,that,bart,is,the,grandchild,of,jacqueline], _).
-?- query([is,it,true,that,lisa,is,the,granddaughter,of,abe], _).
-?- query([is,it,true,that,bart,is,the,grandson,of,abe], _).
-?- query([is,it,true,that,homer,is,the,husband,of,marge], _).
-?- query([is,it,true,that,marge,is,the,wife,of,homer], _).
-?- query([is,it,true,that,ling,is,the,cousin,of,bart], _).
-
-
-?- fail.

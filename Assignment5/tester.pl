@@ -1,0 +1,22 @@
+:- query([is,it,true,that,lisa,is,the,sibling,of,bart], _).
+:- query([is,it,true,that,bart,is,the,brother,of,lisa], _).
+:- query([is,it,true,that,lisa,is,the,sister,of,bart], _).
+:- query([is,it,true,that,bart,is,the,son,of,homer], _).
+:- query([is,it,true,that,lisa,is,the,daughter,of,marge], _).
+:- query([is,it,true,that,maggie,is,the,child,of,homer], _).
+:- query([is,it,true,that,marge,is,the,mother,of,bart], _).
+:- query([is,it,true,that,patty,is,the,aunt,of,lisa], _).
+:- query([is,it,true,that,herb,is,the,uncle,of,bart], _).
+:- query([is,it,true,that,ling,is,the,niece,of,selma], _).
+:- query([is,it,true,that,bart,is,the,nephew,of,patty], _).
+:- query([is,it,true,that,bart,is,the,nibling,of,patty], _).
+:- query([is,it,true,that,abe,is,the,grandparent,of,lisa], _).
+:- query([is,it,true,that,jacqueline,is,the,grandmother,of,bart], _).
+:- query([is,it,true,that,abe,is,the,grandfather,of,maggie], _).
+:- query([is,it,true,that,bart,is,the,grandchild,of,jacqueline], _).
+:- query([is,it,true,that,lisa,is,the,granddaughter,of,abe], _).
+:- query([is,it,true,that,bart,is,the,grandson,of,abe], _).
+:- query([is,it,true,that,homer,is,the,husband,of,marge], _).
+:- query([is,it,true,that,marge,is,the,wife,of,homer], _).
+:- query([is,it,true,that,ling,is,the,cousin,of,bart], _).
+

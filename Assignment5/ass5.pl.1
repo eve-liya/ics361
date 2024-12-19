@@ -29,53 +29,49 @@ This is a DCG (Definite Clause Grammar).
 */
 
 % A yes no question can be made out of multiple sentences
-yesnoquestion --> [is,it,true,that], multiple_sentences(Q), {evaluate_predicates(Q)}.
+yesnoquestion --> [is,it,true,that], multiple_sentences(Q), {Q}.
 
-whoisquestion(Answer) --> [who, is, the], relation(X, num=sing), [of], person(Y), {=..(Q, [X,Answer,Y]), Q}.
-
-% A single person
-people([P], num=sing) --> person(P).  
-% Will match a list of people, if it needs to be multiple it will only be plural
-people([P | PS], num=plur) --> person(P), [and], people(PS, num=_).
-
-% A multiple sentence can be a single sentence
-multiple_sentences(Q) --> sentence(Q), {evaluate_predicates(Q)}.
+% yesnoquestion can also be 
+yesnoquestion --> [is,it,true,that], sentence(Q), {Q}.
 
 % Multiple sentences are a sentence seperated by "and", both of them have to be true
-multiple_sentences(Q) --> sentence(Q),[and],multiple_sentences(Qs),{evaluate_predicates(Q),evaluate_predicates(Qs)}.
+multiple_sentences(Q) --> sentence(Q),[and],multiple_sentences(Qs),{Q,Qs}.
+
+% A multiple sentence can be a single sentence
+multiple_sentences(Q) --> sentence(Q).
 
 % Given, X matches with person, we find the relation and then find Y
 sentence(Q) --> 
-    people(X, num=sing), 
+    person(X), 
     [is, the], 
     relation(Rel, num=sing), 
     [of], 
-    people(Y, num=sing), 
-    {is_the(Rel,X,Y,Q), evaluate_predicates(Q)}.
-
-sentence(Q) --> 
-    people(X, num=sing), 
-    [is, a], 
-    relation(Rel, num=sing), 
-    {is_a(Rel,X,Q), evaluate_predicates(Q)}.
+    person(Y), 
+    {=..(Q, [Rel, X, Y])}. % evaluate it using the =.. univ operator calls the relation(X,Y).
 
 % same as above but with is a instead
 sentence(Q) --> 
-    people(X, num=sing),
+    person(X), 
+    [is, a], 
+    relation(Rel, num=sing), 
+    {=..(Q, [Rel, X, _])}. % evaluate it using =.. Relation(X,_) since we don't care abut the second
+
+sentence(Q) --> 
+    person(X),
     [has, a],
     relation(Rel, num=sing), 
-    {has_a(Rel,X,Q), evaluate_predicates(Q)}.
-
+    {=..(Q, [Rel, _, X])}. % evalute it using =.. Relation(_,X) since we don't care about the first
+    
 % edge case, like bart has parents -> true
 % i think has is special cus it can be single has plural "you have computers"
 sentence(Q) --> 
-    people(X, num=sing), 
+    person(X), 
     [has], 
     relation(Rel, num=plur), 
-    {has_a(Rel,X,Q), evaluate_predicates(Q)}.
+    {=..(Q, [Rel, _, X])}. 
 
 % gets multiple people, then since are, we call the is_a function to get a list of all the predicats, 
-% then evaluate them to make sure they are all true
+% then evaluate them to make sure they ar`e all true
 sentence(Q) --> 
     people(XS, num=plur), 
     [are], 
@@ -89,6 +85,13 @@ sentence(Q) -->
     [have],
     relation(Rel, num=plur),
     {has_a(Rel,XS,Q), evaluate_predicates(Q)}.
+
+whoisquestion(Answer) --> [who, is, the], relation(X, num=sing), [of], person(Y), {=..(Q, [X,Answer,Y]), Q}.
+
+% Will match a list of people, if it needs to be multiple it will only be plural
+people([P | PS], num=plur) --> person(P), [and], people(PS, num=_).
+% A single person
+people([P], num=sing) --> person(P).  
 
 person(homer) --> [homer].
 person(lisa) --> [lisa].
@@ -110,16 +113,8 @@ relation(father, num=sing) --> [father].
 relation(father, num=plur) --> [fathers].
 relation(mother, num=sing) --> [mother].
 relation(mother, num=plur) --> [mothers].
-relation(husband, num=sing) --> [husband].
-relation(husbands, num=plur) --> [husbands].
-relation(wife, num=sing) --> [wife].
-relation(wife, num=plur) --> [wifes].
 relation(child, num=sing) --> [child].
 relation(child, num=plur) --> [children].
-relation(daughter, num=sing) --> [daughter].
-relation(daughter, num=plur) --> [daughters].
-relation(son, num=sing) --> [son].
-relation(son, num=plur) --> [sons].
 relation(sibling, num=sing) --> [sibling].
 relation(sibling, num=plur) --> [siblings].
 relation(ancestor, num=sing) --> [ancestor].
@@ -132,18 +127,10 @@ relation(grandfather, num=sing) --> [grandfather].
 relation(grandfather, num=plur) --> [grandfathers].
 relation(grandmother, num=sing) --> [grandmother].
 relation(grandmother, num=plur) --> [grandmothers].
-relation(grandchild, num=sing) --> [grandchild].
-relation(grandchild, num=plur) --> [grandchildren].
-relation(grandson, num=sing) --> [grandson].
-relation(grandson, num=plur) --> [grandsons].
-relation(granddaughter, num=sing) --> [granddaughter].
-relation(granddaughter, num=plur) --> [granddaughters].
 relation(uncle, num=sing) --> [uncle].
 relation(uncle, num=plur) --> [uncles].
 relation(aunt, num=sing) --> [aunt].
 relation(aunt, num=plur) --> [aunts].
-relation(nibling, num=sing) --> [nibling].
-relation(nibling, num=plur) --> [niblings].
 relation(nephew, num=sing) --> [nephew].
 relation(nephew, num=plur) --> [nephews].
 relation(niece, num=sing) --> [niece].
@@ -200,13 +187,6 @@ has_a(Rel, [HeadP|RestP], [HeadQ|RestQ]) :-
   HeadQ =.. [Rel, _, HeadP],
   has_a(Rel, RestP, RestQ).
 
-is_the(_, [], [], []).
-% Rel, PersonList1, PersonList2, QueryList
-% Interpretation: HeadP1 has a Rel to HeadP2.
-is_the(Rel, [HeadP1|RestP1], [HeadP2|RestP2], [HeadQ|RestQ]) :-
-  HeadQ =.. [Rel, HeadP1, HeadP2],
-  is_the(Rel, RestP1, RestP2, RestQ).
-
 % Used to evaluate the predicate list from is_a/3, has_a/3.
 evaluate_predicates([]).
 evaluate_predicates([H|Rest]) :-
@@ -225,8 +205,7 @@ mother(X,Y) :-
 % sibling(X, Y) checks if X and Y share the same parent (i.e., they have the same mother or father).
 sibling(X,Y) :-
     parent(Z,X),
-    parent(Z,Y),
-    \+ (X = Y).
+    parent(Z,Y).
 
 % brother(X, Y) checks if X and Y are siblings, and X must be male.
 brother(X,Y) :-
@@ -305,8 +284,8 @@ cousin(X,Y) :-
 
 % grandparent(X, Y) checks if X is a grandparent of Y. X is the parent of Y's parent.
 grandparent(X,Y) :-
-    parent(X, Parent),
-    child(Y, Parent).
+    parent(Parent, Y),
+    parent(X, Parent).
 
 % grandmother(X, Y) checks if X is the grandmother of Y. X must be a female grandparent.
 grandmother(X,Y) :-
@@ -398,8 +377,6 @@ parent(mona, herb).
 parent(mona, homer).
 parent(selma, ling).
 
-spouse(abe,mona).
-spouse(mona,abe).
 spouse(clancy, jacqueline).
 spouse(homer, marge).
 spouse(jacqueline, clancy).

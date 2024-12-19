@@ -1,0 +1,403 @@
+gprolog --consult-file ass5.pl
+GNU Prolog 1.5.0 (64 bits)
+Compiled Jan 24 2024, 00:00:00 with gcc
+Copyright (C) 1999-2021 Daniel Diaz
+
+compiling /home/vince/github/ics361/Assignment5/ass5.pl for byte code...
+/home/vince/github/ics361/Assignment5/ass5.pl compiled, 392 lines read - 42380 bytes written, 21 ms
+| ?- query([is,it,true,that,homer,is,the,sibling,of,herb],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,sibling,of,herb],Ans).
+
+Ans = homer ?
+
+(1 ms) yes
+| ?- query([is,it,true,that,bart,is,the,brother,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,brother,of,lisa],Ans).
+
+Ans = bart ?
+
+yes
+| ?- query([is,it,true,that,maggie,is,the,sister,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,sister,of,lisa],Ans).
+
+Ans = maggie ?
+
+yes
+| ?- query([is,it,true,that,homer,is,the,son,of,abe],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,son,of,abe],Ans).
+
+Ans = herb ? ;
+
+Ans = homer ? ;
+
+no
+| ?- query([is,it,true,that,marge,is,the,daughter,of,clancy],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,daughter,of,clancy],Ans).
+
+Ans = marge ? ;
+
+Ans = patty ? ;
+
+Ans = selma ? ;
+
+no
+| ?- query([is,it,true,that,homer,is,the,child,of,abe],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,child,of,abe],Ans).
+
+Ans = herb ? ;
+
+Ans = homer ? ;
+
+no
+| ?- query([is,it,true,that,mona,is,the,mother,of,homer],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,mother,of,homer],Ans).
+
+Ans = mona ? ;
+
+no
+| ?- query([is,it,true,that,patty,is,the,aunt,of,maggie],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,aunt,of,maggie],Ans).
+
+Ans = patty ? ;
+
+Ans = selma ? ;
+
+Ans = patty ? ;
+
+Ans = selma ? ;
+
+no
+| ?- query([is,it,true,that,herb,is,the,uncle,of,bart],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,uncle,of,bart],Ans).
+
+Ans = herb ? ;
+
+Ans = herb ? ;
+
+(1 ms) no
+| ?- query([is,it,true,that,maggie,is,the,niece,of,patty],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,niece,of,selma],Ans).
+
+Ans = lisa ? ;
+
+Ans = lisa ? ;
+
+Ans = maggie ? ;
+
+Ans = maggie ? ;
+
+(1 ms) no
+| ?- query([is,it,true,that,bart,is,the,nephew,of,herb],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,nephew,of,herb],Ans).
+
+Ans = bart ? ;
+
+Ans = bart ? ;
+
+no
+
+| ?- query([is,it,true,that,ling,is,the,nibling,of,homer],_).
+
+true ?
+
+(1 ms) yes
+| ?- query([who,is,the,nibling,of,homer],Ans).
+
+Ans = ling ? ;
+
+Ans = ling ? ;
+
+no
+| ?- query([is,it,true,that,abe,is,the,grandparent,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,grandparent,of,lisa],Ans).
+
+Ans = abe ? ;
+
+Ans = clancy ? ;
+
+Ans = jacqueline ? ;
+
+Ans = mona ? ;
+
+no
+| ?- query([is,it,true,that,mona,is,the,grandmother,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,grandmother,of,lisa],Ans).
+
+Ans = jacqueline ? ;
+
+Ans = mona ? ;
+
+(1 ms) no
+| ?- query([is,it,true,that,abe,is,the,grandfather,of,lisa],_).
+
+true ? ;
+
+no
+| ?- query([who,is,the,grandfather,of,lisa],Ans).
+
+Ans = abe ? ;
+
+Ans = clancy ? ;
+
+no
+| ?- query([is,it,true,that,lisa,is,the,grandchild,of,mona],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,grandchild,of,lisa],Ans).
+
+no
+| ?- query([who,is,the,grandchild,of,mona],Ans).
+
+Ans = bart ? ;
+
+Ans = lisa ? ;
+
+Ans = maggie ? ;
+
+no
+| ?- query([is,it,true,that,lisa,is,the,granddaughter,of,clancy],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,granddaughter,of,clancy],Ans).
+
+Ans = lisa ? ;
+
+Ans = maggie ? ;
+
+Ans = ling ? ;
+
+(1 ms) no
+| ?- query([is,it,true,that,bart,is,the,grandson,of,abe],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,grandson,of,abe],Ans).
+
+Ans = bart ? ;
+
+no
+| ?- query([is,it,true,that,homer,is,the,husband,of,marge],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,husband,of,marge],Ans).
+
+Ans = homer ?
+
+yes
+| ?- query([is,it,true,that,mona,is,the,wife,of,abe],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,wife,of,abe],Ans).
+
+Ans = mona ? ;
+
+no
+| ?- query([is,it,true,that,ling,is,the,cousin,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,cousin,of,lisa],Ans).
+
+Ans = ling ?
+
+yes
+| ?- query([is,it,true,that,abe,is,the,ancestor,of,lisa],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,ancestor,of,lisa],Ans).
+
+Ans = homer ? ;
+
+Ans = marge ? ;
+
+Ans = abe ? ;
+
+Ans = mona ? ;
+
+Ans = clancy ? ;
+
+Ans = jacqueline ? ;
+
+(1 ms) no
+| ?- query([is,it,true,that,maggie,is,the,descendant,of,clancy],_).
+
+true ?
+
+yes
+| ?- query([who,is,the,descendant,of,clancy],Ans).
+
+Ans = marge ? ;
+
+Ans = patty ? ;
+
+Ans = selma ? ;
+
+Ans = bart ? ;
+
+Ans = lisa ? ;
+
+Ans = maggie ? ;
+
+Ans = ling ? ;
+
+no
+| ?- query([is, it, true, that, homer, is, the, father, of, lisa, and, marge, is, the, mother, of, bart], _).
+
+true ? ;
+
+no
+| ?- query([is, it, true, that, homer, is, a, father, and, marge, is, a, mother], _).
+
+true ?
+
+yes
+| ?- query([is, it, true, that, homer, is, the, father, of, lisa, and, marge, is, the, mother, of, bart, and, abe, is, a, father], _).
+
+true ? ;
+
+true ? ;
+
+no
+| ?- query([is, it, true, that, homer, is, the, father, of, lisa, and, lisa, is, the, mother, of, bart, and, abe, is, a, father], _).
+
+no
+| ?- query([is, it, true, that, bart, is, the, bro, of, lisa], _).
+
+true ?
+
+yes
+| ?- query([who, is, the, bro, of, lisa], Ans).
+
+Ans = bart ? ;
+
+Ans = bart ? ;
+
+(1 ms) no
+| ?- query([is, it, true, that, mona, is, the, grandma, of, lisa], _).
+
+true ?
+| ?- query([who, is, the, grandma, of, lisa], Ans).
+
+Ans = jacqueline ? a
+
+Ans = mona
+
+(1 ms) no
+| ?- query([is, it, true, that, mona, is, a, grandmother], _).
+
+true ? a
+
+true
+
+true
+
+no
+| ?- query([is, it, true, that, mona, is, a, daughter], _).
+
+no
+| ?- query([is, it, true, that, homer, has, a, son], _).
+
+true ? a
+
+no
+| ?- query([is, it, true, that, homer, and, marge, are, parents], _).
+
+true ? a
+
+true
+
+true
+
+true
+
+true
+
+true
+
+true
+
+true
+
+true
+
+no
+| ?- query([is, it, true, that, bart, and, lisa, and, maggie, have, parents], _).
+
+true ?
+
+yes
+| ?- query([is,it,true,that,bart,are,brothers],X).
+
+no
+| ?- query([is,it,true,that,homer,and,marge,are,parents,and,homer,and,marge,have,children], _).
+
+true ?
+
+yes
+| ?- query([is,it,true,that,bart,have,parents],_).
+
+no
